@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 67113920b9296aa41ae8ef864bf3bade
+guid: f5f09e392c8304b4d8308c112aaa8e0b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Conveyor Belts sprite sheet_0
-    21300002: Conveyor Belts sprite sheet_1
-    21300004: Conveyor Belts sprite sheet_2
-    21300006: Conveyor Belts sprite sheet_3
-    21300008: Conveyor Belts sprite sheet_4
-    21300010: Conveyor Belts sprite sheet_5
-    21300012: Conveyor Belts sprite sheet_6
-    21300014: Conveyor Belts sprite sheet_7
-    21300016: Conveyor Belts sprite sheet_8
-    21300018: Conveyor Belts sprite sheet_9
-    21300020: Conveyor Belts sprite sheet_10
-    21300022: Conveyor Belts sprite sheet_11
+    21300000: Conveyors_0
+    21300002: Conveyors_1
+    21300004: Conveyors_2
+    21300006: Conveyors_3
+    21300008: Conveyors_4
+    21300010: Conveyors_5
+    21300012: Conveyors_6
+    21300014: Conveyors_7
+    21300016: Conveyors_8
+    21300018: Conveyors_9
+    21300020: Conveyors_10
+    21300022: Conveyors_11
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -107,7 +107,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_0
+      name: Conveyors_0
       rect:
         serializedVersion: 2
         x: 1
@@ -121,13 +121,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea8c9ded883dbe247bc0dcfa283d6a26
+      spriteID: 7f0c2d47e76750c41ba3ce63a88e6875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_1
+      name: Conveyors_1
       rect:
         serializedVersion: 2
         x: 50
@@ -141,13 +141,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a947bfd2e37e65c48a19c966f59ea124
+      spriteID: 145f1333bc6f4274cb65288a892e5c7e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_2
+      name: Conveyors_2
       rect:
         serializedVersion: 2
         x: 99
@@ -161,13 +161,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1659b87ae2f28a647ba73c3f6cc7a587
+      spriteID: d258551926e297d4fadba69cc27eb662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_3
+      name: Conveyors_3
       rect:
         serializedVersion: 2
         x: 1
@@ -181,13 +181,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62af520e34e10a041a184089c4fa35d4
+      spriteID: c20edf31229961642bae001bfc8d7a61
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_4
+      name: Conveyors_4
       rect:
         serializedVersion: 2
         x: 50
@@ -201,13 +201,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01ed5f9843490ea4c8c3b6c62ddccb00
+      spriteID: 6ade8beb96d8b38469fbf39448c21ff1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_5
+      name: Conveyors_5
       rect:
         serializedVersion: 2
         x: 99
@@ -221,13 +221,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c6182e48b7d5f4458ea871b4606e0bd
+      spriteID: e80ffa11c783d1f4ba4dab41f19e894b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_6
+      name: Conveyors_6
       rect:
         serializedVersion: 2
         x: 2
@@ -241,13 +241,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e35fc22ee8dd6e748b1a212eb07ea0ce
+      spriteID: 82ed9f678d2e221498189b95cdd12c42
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_7
+      name: Conveyors_7
       rect:
         serializedVersion: 2
         x: 26
@@ -261,13 +261,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b799c94a16952744abed5d984450f5a
+      spriteID: 5c5cdbb63a8aa7d4ca20f8ce8d48262a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_8
+      name: Conveyors_8
       rect:
         serializedVersion: 2
         x: 50
@@ -281,13 +281,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84438733598f8a24d8ef79a493f9ca5a
+      spriteID: 2684a2e48c0c388428536dfa448c09b0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_9
+      name: Conveyors_9
       rect:
         serializedVersion: 2
         x: 74
@@ -301,13 +301,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fa36409afbe13c4db1690c41d164ef8
+      spriteID: e9b9bf26d46f7e542add38081a7bcdc1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_10
+      name: Conveyors_10
       rect:
         serializedVersion: 2
         x: 98
@@ -321,13 +321,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 123f7670522b32c4d811761ffbf0f2b7
+      spriteID: 0b09aa3ff131ed8438d40b64734373bc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Conveyor Belts sprite sheet_11
+      name: Conveyors_11
       rect:
         serializedVersion: 2
         x: 122
@@ -341,7 +341,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1529ce31024b3a94f8eea58991c52c7b
+      spriteID: c112105fe4c48cc47a74a0262dcd26d9
       vertices: []
       indices: 
       edges: []
@@ -349,7 +349,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: be3e88e340ebb6a429688597834a8022
+    spriteID: 1988d429773291d4db100f01bc6b8fc9
     vertices: []
     indices: 
     edges: []
