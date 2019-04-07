@@ -1,22 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Bin : MonoBehaviour
+public class Bin
 {
     private int capacity;
     private int maxCapacity;
     private int binType;
+    private int id;
     public Sprite Sprite;
 
-    void Start()
+    public Bin(Sprite sprite, int type, int maxCapacity, int id)
     {
-        GetComponent<SpriteRenderer>().sprite = Sprite;
+        this.Sprite = sprite;
+        this.binType = type;
+        this.maxCapacity = maxCapacity;
+        SetSprite();
+    }
+
+    void SetSprite()
+    {
+        GameObject go = new GameObject("Bin " + id);
+        go.tag = binType.ToString();
+        SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
+        renderer.sprite = Sprite;
     }
 
     public void EmptyBin()
     {
-
+        capacity = 0;
     }
 
 
