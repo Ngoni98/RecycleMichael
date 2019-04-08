@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class Trash
+public class Trash 
 {
-    GameObject go;
+    public static GameObject go;
     private readonly float valueCash;
-    private readonly float chanceOfDiamond;
+    public float chanceOfDiamond;
     private readonly int id;
     private readonly int trashType;
     private readonly Sprite Sprite;
@@ -25,6 +25,7 @@ public class Trash
         go = new GameObject("Trash " + id);
         SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
         renderer.sprite = Sprite;
+        CircleCollider2D collider =  go.AddComponent<CircleCollider2D>();
     }
 
 
@@ -43,5 +44,10 @@ public class Trash
             go.SetActive(false);
             Controller.UpdateCash(-valueCash);
         }
+    }
+
+    public GameObject GetObject()
+    {
+        return go;
     }
 }

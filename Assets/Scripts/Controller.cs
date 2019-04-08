@@ -9,6 +9,14 @@ public class Controller : MonoBehaviour
     public static int energy;
     private Bin[] bins;
     public GameObject[] binLocations;
+    public Sprite sprite;
+
+    void Start()
+    {
+        Trash t = new Trash(sprite, 3.0f, 0.1f, 1, 0);
+        GameObject trash = t.GetObject();
+        trash.AddComponent<Drag>();
+    }
 
     void StartContract()
     {
