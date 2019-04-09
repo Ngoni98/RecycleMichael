@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ConveyorMovement : MonoBehaviour
 {
-    public Transform[] target;
+    public static Transform[] target;
     public float speed;
     private int current = 0;
+
+
     
     void Update()
     {
@@ -17,6 +19,11 @@ public class ConveyorMovement : MonoBehaviour
         }
         else
             current = (current + 1) % target.Length;
+    }
+
+    public static void SetWaypoints(Transform[] waypoints)
+    {
+        target = waypoints;
     }
 
     void OnBecameInvisible()

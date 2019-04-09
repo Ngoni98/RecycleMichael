@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
+    
+
+    
+
+
     void OnMouseDrag()
     {
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
@@ -11,5 +16,8 @@ public class Drag : MonoBehaviour
         transform.position = objPosition;
     }
 
-
+    void OnTriggerEnter(Collider col)
+    {
+       //Controller.t.OnTriggerEnter(col);
+    }
 }
