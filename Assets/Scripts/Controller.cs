@@ -13,17 +13,26 @@ public class Controller : MonoBehaviour
     public Transform[] leftSideWaypoints;
     public Sprite[] sprites;
 
-    private Sprite sprite;
+    public Sprite sprite;
     //public static Trash t;
     public GameObject trash;
 
+    //Create an object
+    //Add rigidbodies and renderer
+    //Add trash script
+    //Add properties from trash class to the script
 
     void Start()
     {
-        sprite = sprites[0];
-        GameObject t = Instantiate(trash, trash.transform.position, Quaternion.identity) as GameObject;
-        Trash test = new Trash(sprite, 3.0f, 0.1f, 1, 0);
-        t = test.GetObject();
+
+        GameObject t = new GameObject("Test trash");
+        t.transform.position = trash.transform.position;
+        t.AddComponent<TrashScript>();
+        t.GetComponent<TrashScript>().Init(1.0f, 0.05f, 1, 1, sprite, leftSideWaypoints);
+        //sprite = sprites[0];
+        //GameObject t = Instantiate(trash, trash.transform.position, Quaternion.identity) as GameObject;
+        //Trash test = new Trash(sprite, 3.0f, 0.1f, 1, 0);
+        //t = test.GetObject();
 
        // GameObject trash = new Trash(sprite, 3.0f, 0.1f, 1, 0).GetObject();
 

@@ -37,17 +37,17 @@ public class Trash
     // https://answers.unity.com/questions/1089794/oncollisionenter-from-non-monobehaviour-script.html
     public void OnTriggerEnter(Collider collider)
     {
-        ////Check tag of collider
-        //if (collider.tag.Equals(trashType.ToString()))
-        //{
-        //    go.SetActive(false);
-        //    Controller.UpdateCash(valueCash);
-        //}
-        //else
-        //{
-        //    go.SetActive(false);
-        //    Controller.UpdateCash(-valueCash);
-        //} 
+        //Check tag of collider
+        if (collider.tag.Equals(trashType.ToString()))
+        {
+            go.SetActive(false);
+            Controller.UpdateCash(valueCash);
+        }
+        else
+        {
+            go.SetActive(false);
+            Controller.UpdateCash(-valueCash);
+        }
         Debug.Log("cock");
     }
 
