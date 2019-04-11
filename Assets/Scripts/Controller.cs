@@ -8,10 +8,11 @@ public class Controller : MonoBehaviour
     public static int diamonds;
     public static int energy;
 
-    private Bin[] bins;
+    public GameObject[] bins;
     public GameObject[] binLocations;
     public Transform[] leftSideWaypoints;
-    public Sprite[] sprites;
+    public Sprite[] trashSprites;
+    public Sprite[] binSprites;
 
     public Sprite sprite;
     //public static Trash t;
@@ -29,6 +30,7 @@ public class Controller : MonoBehaviour
         t.transform.position = trash.transform.position;
         t.AddComponent<TrashScript>();
         t.GetComponent<TrashScript>().Init(1.0f, 0.05f, 1, 1, sprite, leftSideWaypoints);
+        t.AddComponent<Drag>();
         //sprite = sprites[0];
         //GameObject t = Instantiate(trash, trash.transform.position, Quaternion.identity) as GameObject;
         //Trash test = new Trash(sprite, 3.0f, 0.1f, 1, 0);

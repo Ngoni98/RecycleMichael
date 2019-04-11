@@ -13,31 +13,42 @@ public class TrashScript : MonoBehaviour
 
     private float speed = 0.5f;
     private int current = 0;
+    public bool drag;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        drag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position != waypoints[current].position)
+        if (!drag)
         {
-            Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
-            GetComponent<Rigidbody>().MovePosition(pos);
+            if (transform.position != waypoints[current].position)
+            {
+                Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
+                GetComponent<Rigidbody>().MovePosition(pos);
+            }
+            else
+                current = (current + 1) % waypoints.Length;
         }
-        else
-            current = (current + 1) % waypoints.Length;
     }
 
-    void OnMouseDrag()
-    {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
-        Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        transform.position = objPosition;
-    }
+    //void OnMouseDrag()
+    //{
+    //    drag = !drag;
+    //    Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+    //    Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+    //    transform.position = objPosition;
+    //}
+
+    //void OnMouseUp()
+    //{
+    //    if (drag)
+    //        drag = !drag;
+    //}
 
     /// <summary>
     /// Initializes the trash object
@@ -68,19 +79,20 @@ public class TrashScript : MonoBehaviour
         Debug.Log("big cock");
     }
 
-    //public void OnTriggerEnter(Collider collider)
-    //{
-    //    Debug.Log("cock");
-    //    //Check tag of collider
-    //    if (collider.tag.Equals(trashType.ToString()))
-    //    {
-    //        gameObject.SetActive(false);
-    //        Controller.UpdateCash(valueCash);
-    //    }
-    //    else
-    //    {
-    //        gameObject.SetActive(false);
-    //        Controller.UpdateCash(-valueCash);
-    //    }
-    //}
+    public void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log("cock");
+        //Check tag of collider
+        if (collider.tag.Equals(trashType.ToString()))
+        {
+            Debug.Log("COCK");
+            gameObject.SetActive(false);
+            Controller.UpdateCash(valueCash);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            Controller.UpdateCash(-valueCash);
+        }
+    }
 }
