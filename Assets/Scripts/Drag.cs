@@ -28,7 +28,7 @@ public class Drag : MonoBehaviour
                 case TouchPhase.Began:
                     if(GetComponent<BoxCollider>() == Physics2D.OverlapPoint(touchPos))
                     {
-                        GetComponent<TrashScript>().drag = true;
+                        //GetComponent<TrashScript>().drag = true;
                         deltaX = touchPos.x - transform.position.x;
                         deltaY = touchPos.y - transform.position.y;
 
@@ -52,6 +52,14 @@ public class Drag : MonoBehaviour
         }
     }
     
-
+    //if(col == Physics2D.OverlapCircle(mousePos, 0.2f))
+    //    {
+    //        Debug.Log("Overlap");
+    //        drag = true;
+    //        rb.gravityScale = 1.0f;
+    //        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z);
+    //Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+    //transform.position = objPosition;
+    //    }
 
 }

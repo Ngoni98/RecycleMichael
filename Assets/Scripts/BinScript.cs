@@ -12,7 +12,7 @@ public class BinScript : MonoBehaviour
 
     void Start()
     {
-        gameObject.tag = binType.ToString();
+        gameObject.name = binType.ToString();
     }
 
     public void Init(int maxCapacity, int binType, int id, Sprite Sprite)

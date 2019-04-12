@@ -11,38 +11,53 @@ public class TrashScript : MonoBehaviour
     private Sprite Sprite;
     private Transform[] waypoints;
 
+    private BoxCollider2D col;
+    private Rigidbody2D rb;
+    private Vector3 move;
+
     private float speed = 0.5f;
     private int current = 0;
-    public bool drag;
+    private bool drag;
 
     // Start is called before the first frame update
     void Start()
     {
-        drag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!drag)
+        if (drag == false)
         {
             if (transform.position != waypoints[current].position)
             {
                 Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
-                GetComponent<Rigidbody>().MovePosition(pos);
+                rb.MovePosition(pos);
             }
             else
                 current = (current + 1) % waypoints.Length;
         }
     }
 
-    //void OnMouseDrag()
-    //{
-    //    drag = !drag;
-    //    Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //    Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-    //    transform.position = objPosition;
-    //}
+    void OnMouseDrag()
+    {
+        //Debug.Log("Drag");
+        
+        move.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+        move.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+        move.z = -1;
+
+
+        //float mouseX = Input.mousePosition.x;
+        //float mouseY = Input.mousePosition.y;
+
+        //Vector3 mousePos = new Vector3(mouseX, mouseY, 0.0f);
+        //Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        drag = true;
+        gameObject.transform.position = move;
+        
+    }
 
     //void OnMouseUp()
     //{
@@ -69,13 +84,15 @@ public class TrashScript : MonoBehaviour
         //this.Sprite = sprite;
         this.waypoints = waypoints;
 
-        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.useGravity = false;
-        BoxCollider collider = gameObject.AddComponent<BoxCollider>();
+        rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+        col = gameObject.AddComponent<BoxCollider2D>();
+        col.size += new Vector2(0.1f, 0.05f);
         SpriteRenderer renderer = gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
         renderer.sortingOrder = 1;
         transform.localScale -= new Vector3(0.5f, 0.5f, 0);
+        drag = false;
         Debug.Log("big cock");
     }
 
@@ -83,7 +100,7 @@ public class TrashScript : MonoBehaviour
     {
         Debug.Log("cock");
         //Check tag of collider
-        if (collider.tag.Equals(trashType.ToString()))
+        if (collider.name.Equals(trashType.ToString()))
         {
             Debug.Log("COCK");
             gameObject.SetActive(false);
