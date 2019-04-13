@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrashScript : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class TrashScript : MonoBehaviour
 
     private float speed = 0.5f;
     private int current = 0;
-    private bool drag;
+    public bool drag;
 
     // Start is called before the first frame update
     void Start()
@@ -27,37 +28,37 @@ public class TrashScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (drag == false)
-        {
-            if (transform.position != waypoints[current].position)
-            {
-                Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
-                rb.MovePosition(pos);
-            }
-            else
-                current = (current + 1) % waypoints.Length;
-        }
+        //if (drag == false)
+        //{
+        //    if (transform.position != waypoints[current].position)
+        //    {
+        //        Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
+        //        rb.MovePosition(pos);
+        //    }
+        //    else
+        //        current = (current + 1) % waypoints.Length;
+        //}
     }
 
-    void OnMouseDrag()
-    {
-        //Debug.Log("Drag");
+    //void OnMouseDrag()
+    //{
+    //    //Debug.Log("Drag");
         
-        move.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-        move.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
-        move.z = -1;
+    //    move.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+    //    move.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+    //    move.z = -1;
 
 
-        //float mouseX = Input.mousePosition.x;
-        //float mouseY = Input.mousePosition.y;
+    //    //float mouseX = Input.mousePosition.x;
+    //    //float mouseY = Input.mousePosition.y;
 
-        //Vector3 mousePos = new Vector3(mouseX, mouseY, 0.0f);
-        //Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);
+    //    //Vector3 mousePos = new Vector3(mouseX, mouseY, 0.0f);
+    //    //Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        drag = true;
-        gameObject.transform.position = move;
+    //    drag = true;
+    //    gameObject.transform.position = move;
         
-    }
+    //}
 
     //void OnMouseUp()
     //{
@@ -87,16 +88,19 @@ public class TrashScript : MonoBehaviour
         rb = gameObject.AddComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         col = gameObject.AddComponent<BoxCollider2D>();
+        col.isTrigger = true;
         col.size += new Vector2(0.1f, 0.05f);
         SpriteRenderer renderer = gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
         renderer.sortingOrder = 1;
+        //gameObject.AddComponent<Lean.Touch.LeanSelectable>().DeselectOnUp = true;
+        gameObject.AddComponent<Lean.Touch.LeanTranslate>();
         transform.localScale -= new Vector3(0.5f, 0.5f, 0);
         drag = false;
         Debug.Log("big cock");
     }
 
-    public void OnTriggerEnter(Collider collider)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("cock");
         //Check tag of collider
@@ -104,12 +108,22 @@ public class TrashScript : MonoBehaviour
         {
             Debug.Log("COCK");
             gameObject.SetActive(false);
-            Controller.UpdateCash(valueCash);
+
+            UpdateCash(valueCash);
         }
         else
         {
             gameObject.SetActive(false);
-            Controller.UpdateCash(-valueCash);
+            UpdateCash(-valueCash);
         }
+    }
+
+    void UpdateCash(float amount)
+    {
+        float cash = PlayerPrefs.GetFloat("Cash");
+        cash += amount;
+        //Text cashText = FindObjectOfType<Text>();
+        Controller.cashText.text = "$" + cash.ToString();
+        PlayerPrefs.SetFloat("Cash", cash);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Controller : MonoBehaviour
     public static int diamonds;
     public static int energy;
 
+    public Text cashText;
     public GameObject[] bins;
     public GameObject[] binLocations;
     public Transform[] leftSideWaypoints;
@@ -29,7 +31,7 @@ public class Controller : MonoBehaviour
         GameObject t = new GameObject("Test trash");
         t.transform.position = trash.transform.position;
         t.AddComponent<TrashScript>();
-        t.GetComponent<TrashScript>().Init(1.0f, 0.05f, 1, 1, sprite, leftSideWaypoints);
+        t.GetComponent<TrashScript>().Init(1.0f, 0.05f, 1, 0, sprite, leftSideWaypoints);
         //t.AddComponent<Drag>();
         //sprite = sprites[0];
         //GameObject t = Instantiate(trash, trash.transform.position, Quaternion.identity) as GameObject;
@@ -79,9 +81,12 @@ public class Controller : MonoBehaviour
 
     }
 
-    public static void UpdateCash(float amount)
+    void UpdateCash(float amount)
     {
+        cash = PlayerPrefs.GetFloat("Cash");
         cash += amount;
+        cashText.text = "$" + cash.ToString();
+        PlayerPrefs.SetFloat("Cash", cash);
     }
      void UpdateDiamonds(int amount)
     {
