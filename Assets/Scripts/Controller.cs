@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
 
     public Sprite sprite;
     //public static Trash t;
-    public GameObject trash;
+    //public GameObject test;
 
     //Create an object
     //Add rigidbodies and renderer
@@ -27,18 +27,30 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
+        cashText.text = "$" + PlayerPrefs.GetFloat("Cash");
+        GameObject test = new GameObject("Test trash");
 
-        GameObject t = new GameObject("Test trash");
-        t.transform.position = trash.transform.position;
+        GameObject t = Instantiate(test);
+        t.name = "Trash0";
+        t.transform.position = new Vector3(-0.5f, 1, 0);
         t.AddComponent<TrashScript>();
-        t.GetComponent<TrashScript>().Init(1.0f, 0.05f, 1, 0, sprite, leftSideWaypoints);
+        t.GetComponent<TrashScript>().Init(1.50f, 0.05f, 0, 0, trashSprites[0], leftSideWaypoints);
+
+        GameObject t1 = Instantiate(test);
+        t1.name = "Trash1";
+        t1.transform.position = new Vector3(0.5f, 1, 0);
+        t1.AddComponent<TrashScript>();
+        t1.GetComponent<TrashScript>().Init(1.50f, 0.05f, 1, 0, trashSprites[1], leftSideWaypoints);
+
+
+
         //t.AddComponent<Drag>();
         //sprite = sprites[0];
         //GameObject t = Instantiate(trash, trash.transform.position, Quaternion.identity) as GameObject;
         //Trash test = new Trash(sprite, 3.0f, 0.1f, 1, 0);
         //t = test.GetObject();
 
-       // GameObject trash = new Trash(sprite, 3.0f, 0.1f, 1, 0).GetObject();
+        // GameObject trash = new Trash(sprite, 3.0f, 0.1f, 1, 0).GetObject();
 
 
         //trash.AddComponent<TrashBehaviour>();

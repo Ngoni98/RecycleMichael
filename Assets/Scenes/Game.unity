@@ -394,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &35906051
 Transform:
   m_ObjectHideFlags: 0
@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 97453772}
   - component: {fileID: 97453771}
   - component: {fileID: 97453770}
+  - component: {fileID: 97453773}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -561,6 +562,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &97453773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97453769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1997211142, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ForceModuleActive: 0
 --- !u!1 &151351630
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +633,7 @@ MeshCollider:
   m_GameObject: {fileID: 161638044}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -677,7 +691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161638044}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 2.03, y: 1, z: 0.96}
   m_Children: []
   m_Father: {fileID: 0}
@@ -698,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &235024304
 Transform:
   m_ObjectHideFlags: 0
@@ -943,7 +957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &456447278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,15 +970,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc98219a83dff145947365dc914d06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TapThreshold: 0.2
-  SwipeThreshold: 100
+  TapThreshold: 0.5
+  SwipeThreshold: 50
   ReferenceDpi: 200
   GuiLayers:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   RecordFingers: 1
   RecordThreshold: 5
-  RecordLimit: 10
+  RecordLimit: 0
   SimulateMultiFingers: 1
   PinchTwistKey: 306
   MovePivotKey: 308
@@ -982,7 +996,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &489941266
 GameObject:
@@ -1139,7 +1153,7 @@ Transform:
   - {fileID: 1812658147}
   - {fileID: 2082794304}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550100474
 GameObject:
@@ -1492,36 +1506,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 707432746}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &716719008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 716719009}
-  m_Layer: 0
-  m_Name: Test Trash
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &716719009
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716719008}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.041, y: 1.245, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &829984735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,6 +1579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d5e396fbf190246b698df473b76414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cashText: {fileID: 1429720635}
   bins: []
   binLocations:
   - {fileID: 657958391}
@@ -1607,10 +1592,25 @@ MonoBehaviour:
   - {fileID: 829984736}
   - {fileID: 151351631}
   - {fileID: 1419395883}
-  trashSprites: []
+  trashSprites:
+  - {fileID: 21300000, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300002, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300004, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300006, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300008, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300010, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300012, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300014, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300016, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300018, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300020, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300022, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300024, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300026, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300028, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
+  - {fileID: 21300030, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
   binSprites: []
   sprite: {fileID: 21300000, guid: 1c3864853eaca12499c98361c9b8219a, type: 3}
-  trash: {fileID: 716719008}
 --- !u!1 &1072616991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,7 +2008,7 @@ GameObject:
   - component: {fileID: 1429720636}
   - component: {fileID: 1429720635}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Cash Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2292,6 +2292,123 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7abb0b46d8e99479430491eacd73a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2010559467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2010559468}
+  - component: {fileID: 2010559470}
+  - component: {fileID: 2010559469}
+  - component: {fileID: 2010559471}
+  m_Layer: 0
+  m_Name: Select Down 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2010559468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010559467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2010559469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010559467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb097c07812299498915a0a3e793843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  RequiredSelectable: {fileID: 0}
+  OnDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2010559470}
+        m_MethodName: SelectScreenPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Lean.Touch.LeanFingerDown+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &2010559470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010559467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479d695282ba6cf4ba3ab3c4848f05e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectUsing: 1
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  Camera: {fileID: 0}
+  MaxSelectables: 0
+  Search: 0
+  Reselect: 3
+  AutoDeselect: 0
+--- !u!114 &2010559471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010559467}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c1c71d8ad5da9438de3b2e5990763f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredTapCount: 0
+  RequiredTapInterval: 0
+  RequiredSelectable: {fileID: 0}
+  OnTap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2010559470}
+        m_MethodName: SelectScreenPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &2039018184
 PrefabInstance:
   m_ObjectHideFlags: 0

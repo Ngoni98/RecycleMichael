@@ -41,12 +41,12 @@ public class Trash
         if (collider.tag.Equals(trashType.ToString()))
         {
             go.SetActive(false);
-            Controller.UpdateCash(valueCash);
+            //Controller.UpdateCash(valueCash);
         }
         else
         {
             go.SetActive(false);
-            Controller.UpdateCash(-valueCash);
+            //Controller.UpdateCash(-valueCash);
         }
         Debug.Log("cock");
     }
