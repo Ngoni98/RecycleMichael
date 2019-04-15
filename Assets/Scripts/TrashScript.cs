@@ -19,9 +19,14 @@ public class TrashScript : MonoBehaviour
     private Lean.Touch.LeanTranslate translate;
     private Vector3 move;
 
-    private float speed = 0.5f;
+    private float speed = 0.2f;
     private int current = 0;
     public bool drag;
+
+    public Vector3 mousePrevPos;
+    public Vector3 mouseCurPos;
+    public Vector3 force;
+    public float topSpeed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -31,76 +36,47 @@ public class TrashScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Check for touch, check if the touch pos is contained within the bounds of this collider
-        //if so then update the transform of this object to the touch pos
-        //If touch then stop the waypoints from executing
+        if (drag == false)
+        {
+            if (transform.position != waypoints[current].position)
+            {
+                Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
+                rb.MovePosition(pos);
+            }
+            else
+                current = (current + 1) % waypoints.Length;
+        }
+    }
 
-        //if (Input.touchCount > 0)
-        //{
-        //    Touch touch = Input.GetTouch(0); // get first touch since touch count is greater than zero
-        //    Vector3 touchedPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
-        //    bool overSprite = renderer.bounds.Contains(touchedPos);
-        //    if (overSprite)
-        //    {
-        //        if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
-        //        {
-        //            // get the touch position from the screen touch to world point
-
-
-        //            // lerp and set the position of the current object to that of the touch, but smoothly over time.
-        //            transform.position = Vector3.Lerp(transform.position, touchedPos, Time.deltaTime);
-        //        }
-        //    }
-        //}
-
-
-
-        //if (drag == false)
-        //{
-        //    if (transform.position != waypoints[current].position)
-        //    {
-        //        Vector3 pos = Vector3.MoveTowards(transform.position, waypoints[current].position, speed * Time.deltaTime);
-        //        rb.MovePosition(pos);
-        //    }
-        //    else
-        //        current = (current + 1) % waypoints.Length;
-        //}
+    void OnMouseDown()
+    {
+        drag = true;
+        mousePrevPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.08f);
     }
 
     void OnMouseDrag()
     {
-        rb.gravityScale = 0.1f;
+        rb.gravityScale = 5.0f;
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.08f);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
         transform.position = objPosition;
+
+        force = mousePosition - mousePrevPos;
+        mousePrevPos = mousePosition;
+        
     }
 
-    //void OnMouseDrag()
-    //{
-    //    //Debug.Log("Drag");
+    public void OnMouseUp()
+    {
+        //Makes sure there isn't a ludicrous speed
+        if (rb.velocity.magnitude > topSpeed)
+            force = rb.velocity.normalized * topSpeed;
+    }
 
-    //    move.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-    //    move.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
-    //    move.z = -1;
-
-
-    //    //float mouseX = Input.mousePosition.x;
-    //    //float mouseY = Input.mousePosition.y;
-
-    //    //Vector3 mousePos = new Vector3(mouseX, mouseY, 0.0f);
-    //    //Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);
-
-    //    drag = true;
-    //    gameObject.transform.position = move;
-
-    //}
-
-    //void OnMouseUp()
-    //{
-    //    if (drag)
-    //        drag = !drag;
-    //}
+    public void FixedUpdate()
+    {
+        rb.velocity = force;
+    }
 
     /// <summary>
     /// Initializes the trash object
@@ -121,25 +97,20 @@ public class TrashScript : MonoBehaviour
         //this.Sprite = sprite;
         this.waypoints = waypoints;
 
-        
-        transform.localScale -= new Vector3(0.5f, 0.5f, 0);
-
-        rb = gameObject.AddComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
+        renderer = gameObject.AddComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        renderer.sortingOrder = 1;
 
         col = gameObject.AddComponent<BoxCollider2D>();
         col.isTrigger = true;
-        col.size -= new Vector2(0.4f, 0.45f);
+        //col.size -= new Vector2(0.5f, 0.5f);
 
-        renderer = gameObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-        renderer.sortingOrder = 0;
+        rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+        rb.mass = 5.0f;
 
-        //selectable = gameObject.AddComponent<Lean.Touch.LeanSelectable>();
-        //selectable.DeselectOnUp = true;
-
-        //translate = gameObject.AddComponent<Lean.Touch.LeanTranslate>();
-        //translate.RequiredSelectable = selectable;
+        transform.localScale -= new Vector3(0.5f, 0.5f, 0);
+        gameObject.layer = 9;
 
         drag = false;
         Debug.Log("big cock");
@@ -149,7 +120,9 @@ public class TrashScript : MonoBehaviour
     {
         Debug.Log("cock");
         //Check tag of collider
-        if (collider.name.Equals(trashType.ToString()))
+        if (collider.gameObject.layer == 9)
+            return;
+        else if (collider.name.Equals(trashType.ToString()))
         {
             Debug.Log("COCK");
             UpdateCash(valueCash);

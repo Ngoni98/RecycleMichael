@@ -32,13 +32,13 @@ public class Controller : MonoBehaviour
 
         GameObject t = Instantiate(test);
         t.name = "Trash0";
-        t.transform.position = new Vector3(-0.5f, 1, 0);
+        t.transform.position = new Vector3(-1.5f, 1.425f, 0);
         t.AddComponent<TrashScript>();
         t.GetComponent<TrashScript>().Init(1.50f, 0.05f, 0, 0, trashSprites[0], leftSideWaypoints);
 
         GameObject t1 = Instantiate(test);
         t1.name = "Trash1";
-        t1.transform.position = new Vector3(0.5f, 1, 0);
+        t1.transform.position = new Vector3(-2.5f, 1.425f, 0);
         t1.AddComponent<TrashScript>();
         t1.GetComponent<TrashScript>().Init(1.50f, 0.05f, 1, 0, trashSprites[1], leftSideWaypoints);
 

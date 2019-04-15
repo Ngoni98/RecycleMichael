@@ -4,62 +4,45 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    float deltaX, deltaY;
-
-    Rigidbody rb;
-
-    bool moveAllowed = false;
+    public Vector3 gameObjectSreenPoint;
+    public Vector3 mousePreviousLocation;
+    public Vector3 mouseCurLocation;
+    Rigidbody2D rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
-
-    void Update()
+    void OnMouseDown()
     {
-        if(Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    if(GetComponent<BoxCollider>() == Physics2D.OverlapPoint(touchPos))
-                    {
-                        //GetComponent<TrashScript>().drag = true;
-                        deltaX = touchPos.x - transform.position.x;
-                        deltaY = touchPos.y - transform.position.y;
-
-                        moveAllowed = true;
-
-
-                    }
-                    break;
-
-                case TouchPhase.Moved:
-                    if(GetComponent<BoxCollider>() == Physics2D.OverlapPoint(touchPos) && moveAllowed)
-                    {
-                        rb.MovePosition(new Vector2(touchPos.x - deltaX, touchPos.y - deltaY));
-                    }
-                    break;
-                case TouchPhase.Ended:
-                    moveAllowed = false;
-                    rb.useGravity = true;
-                    break;
-            }
-        }
+        //This grabs the position of the object in the world and turns it into the position on the screen
+        gameObjectSreenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        //Sets the mouse pointers vector3
+        mousePreviousLocation = new Vector3(Input.mousePosition.x, Input.mousePosition.y, gameObjectSreenPoint.z);
     }
-    
-    //if(col == Physics2D.OverlapCircle(mousePos, 0.2f))
-    //    {
-    //        Debug.Log("Overlap");
-    //        drag = true;
-    //        rb.gravityScale = 1.0f;
-    //        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z);
-    //Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-    //transform.position = objPosition;
-    //    }
+
+    public Vector3 force;
+    public Vector3 objectCurrentPosition;
+    public Vector3 objectTargetPosition;
+    public float topSpeed = 10;
+    void OnMouseDrag()
+    {
+        mouseCurLocation = new Vector3(Input.mousePosition.x, Input.mousePosition.y, gameObjectSreenPoint.z);
+        force = mouseCurLocation - mousePreviousLocation;//Changes the force to be applied
+        mousePreviousLocation = mouseCurLocation;
+    }
+
+    public void OnMouseUp()
+    {
+        rb.gravityScale = 0.1f;
+        //Makes sure there isn't a ludicrous speed
+        if (rb.velocity.magnitude > topSpeed)
+            force = rb.velocity.normalized * topSpeed;
+    }
+
+    public void FixedUpdate()
+    {
+        rb.velocity = force;
+    }
 
 }
