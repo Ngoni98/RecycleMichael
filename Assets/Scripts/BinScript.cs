@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BinScript : MonoBehaviour
 {
-    private int capacity;
+    public int capacity;
     public int maxCapacity;
     public int binType;
     public int id;

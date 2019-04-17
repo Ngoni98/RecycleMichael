@@ -25,7 +25,7 @@ public class DummyControlUnit : MonoBehaviour
             case DragAndDropCell.TriggerType.DropEventEnd:                      // Drop event completed (successful or not)
                 if (desc.permission == true)                                    // If drop successful (was permitted before)
                 {
-                    Debug.Log("Successful drop " + desc.item.name + " from " + sourceSheet.name + " to " + destinationSheet.name);
+                    Debug.Log("Successful drop " + desc.item.name + " from " + sourceSheet.name + " to " + destinationSheet.name+ " "+desc.destinationCell.name);
                 }
                 else                                                            // If drop unsuccessful (was denied before)
                 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TrashScript : MonoBehaviour
 {
@@ -113,27 +114,46 @@ public class TrashScript : MonoBehaviour
         gameObject.layer = 9;
 
         drag = false;
-        Debug.Log("big cock");
+        Debug.Log("Initialised"+itemId);
     }
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("cock");
+        Debug.Log("Collision");
         //Check tag of collider
         if (collider.gameObject.layer == 9)
             return;
         else if (collider.name.Equals(trashType.ToString()))
         {
-            Debug.Log("COCK");
+            Debug.Log("Successful bin");
             UpdateCash(valueCash);
+            //UpdateDiamonds(chanceOfDiamond);
             gameObject.SetActive(false);            
         }
         else
         {
-            Debug.Log("Oops");
+            Debug.Log("Wrong bin");
             UpdateCash(-valueCash);
             gameObject.SetActive(false);            
         }
+    }
+
+    void UpdateDiamonds(float chance)
+    {
+        if (Random.value > (1 - chance))
+        {
+            if (PlayerPrefs.HasKey("Diamonds"))
+            {
+                int diamonds = PlayerPrefs.GetInt("Diamonds");
+                diamonds++;
+                PlayerPrefs.SetInt("Diamonds", diamonds);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Diamonds", 1);
+            }
+        }
+        
     }
 
     void UpdateCash(float amount)
@@ -142,16 +162,15 @@ public class TrashScript : MonoBehaviour
         {
             float cash = PlayerPrefs.GetFloat("Cash");
             cash += amount;
-            Text cashText = GameObject.Find("Cash Text").GetComponent<Text>();
-            cashText.text = "$" + cash.ToString();
+            TextMeshProUGUI cashText = GameObject.Find("Cash Text").GetComponent<TextMeshProUGUI>();
+            cashText.text = "Cash: $" + cash.ToString();
             PlayerPrefs.SetFloat("Cash", cash);
         }
         else
         {
-            PlayerPrefs.SetFloat("Cash", 0f);
-            Text cashText = GameObject.Find("Cash Text").GetComponent<Text>();
-            cashText.text = "$" + amount.ToString();
             PlayerPrefs.SetFloat("Cash", amount);
+            TextMeshProUGUI cashText = GameObject.Find("Cash Text").GetComponent<TextMeshProUGUI>();
+            cashText.text = "Cash: $" + amount.ToString();
 
         }
     }

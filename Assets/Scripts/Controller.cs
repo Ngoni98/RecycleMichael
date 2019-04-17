@@ -2,14 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
-    public static float cash;
-    public static int diamonds;
-    public static int energy;
+    private float cash;
+    private int diamonds;
+    private int energy;
+    private int maxEnergy;
+    private float deltaEng;
 
-    public Text cashText;
+    public TextMeshProUGUI cashText;
+    public TextMeshProUGUI diamondText;
+    public TextMeshProUGUI energyText;
+
+    public TextMeshProUGUI testText;
+    //public Text cashText;
+    //public Text testText;
     public GameObject[] bins;
     public GameObject[] binLocations;
     public Transform[] leftSideWaypoints;
@@ -27,7 +36,22 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
-        cashText.text = "$" + PlayerPrefs.GetFloat("Cash");
+        if (PlayerPrefs.HasKey("Cash"))
+        {
+            cashText.text = "Cash: $" + PlayerPrefs.GetFloat("Cash");
+        }
+        
+        if (PlayerPrefs.HasKey("Diamonds"))
+        {
+            diamondText.text = "Diamonds: " + PlayerPrefs.GetInt("Diamonds");
+        }
+        if (PlayerPrefs.HasKey("Energy"))
+        {
+            energyText.text = "Energy: " + PlayerPrefs.GetInt("Energy");
+        }
+       
+
+
         GameObject test = new GameObject("Test trash");
 
         GameObject t = Instantiate(test);
@@ -68,6 +92,14 @@ public class Controller : MonoBehaviour
         //ConveyorMovement.SetWaypoints(leftSideWaypoints);
     }
 
+    void Update()
+    {
+
+        deltaEng += Time.deltaTime;
+        testText.text = "Time passed: " + deltaEng.ToString();
+        
+    }
+
     void StartContract()
     {
         //Begin the game 
@@ -93,13 +125,13 @@ public class Controller : MonoBehaviour
 
     }
 
-    void UpdateCash(float amount)
-    {
-        cash = PlayerPrefs.GetFloat("Cash");
-        cash += amount;
-        cashText.text = "$" + cash.ToString();
-        PlayerPrefs.SetFloat("Cash", cash);
-    }
+    //void UpdateCash(float amount)
+    //{
+    //    cash = PlayerPrefs.GetFloat("Cash");
+    //    cash += amount;
+    //    cashText.text = "$" + cash.ToString();
+    //    PlayerPrefs.SetFloat("Cash", cash);
+    //}
      void UpdateDiamonds(int amount)
     {
 
