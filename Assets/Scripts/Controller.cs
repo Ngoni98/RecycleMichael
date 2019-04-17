@@ -36,18 +36,20 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
+        GameObject mainMenuController = GameObject.Find("Main Menu Controller");
+        MenuController menuController = mainMenuController.GetComponent<MenuController>();
+        
         if (PlayerPrefs.HasKey("Cash"))
         {
-            cashText.text = "Cash: $" + PlayerPrefs.GetFloat("Cash");
-        }
-        
+            cashText.text = "CASH: $" + PlayerPrefs.GetFloat("Cash");
+        }        
         if (PlayerPrefs.HasKey("Diamonds"))
         {
-            diamondText.text = "Diamonds: " + PlayerPrefs.GetInt("Diamonds");
+            diamondText.text = "DIAMONDS: " + PlayerPrefs.GetInt("Diamonds");
         }
         if (PlayerPrefs.HasKey("Energy"))
         {
-            energyText.text = "Energy: " + PlayerPrefs.GetInt("Energy");
+            energyText.text = "ENERGY: " + PlayerPrefs.GetInt("Energy");
         }
        
 
@@ -58,13 +60,13 @@ public class Controller : MonoBehaviour
         t.name = "Trash0";
         t.transform.position = new Vector3(-1.5f, 1.425f, 0);
         t.AddComponent<TrashScript>();
-        t.GetComponent<TrashScript>().Init(1.50f, 0.05f, 0, 0, trashSprites[0], leftSideWaypoints);
+        t.GetComponent<TrashScript>().Init(1.50f, 0.1f, 0, 0, trashSprites[0], leftSideWaypoints);
 
         GameObject t1 = Instantiate(test);
         t1.name = "Trash1";
         t1.transform.position = new Vector3(-2.5f, 1.425f, 0);
         t1.AddComponent<TrashScript>();
-        t1.GetComponent<TrashScript>().Init(1.50f, 0.05f, 1, 0, trashSprites[1], leftSideWaypoints);
+        t1.GetComponent<TrashScript>().Init(1.50f, 0.1f, 1, 0, trashSprites[1], leftSideWaypoints);
 
 
 

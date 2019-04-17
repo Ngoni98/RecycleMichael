@@ -146,11 +146,15 @@ public class TrashScript : MonoBehaviour
             {
                 int diamonds = PlayerPrefs.GetInt("Diamonds");
                 diamonds++;
+                TextMeshProUGUI diamondText = GameObject.Find("Diamond Text").GetComponent<TextMeshProUGUI>();
+                diamondText.text = "DIAMONDS: " + diamonds.ToString();
                 PlayerPrefs.SetInt("Diamonds", diamonds);
             }
             else
-            {
+            {   
                 PlayerPrefs.SetInt("Diamonds", 1);
+                TextMeshProUGUI diamondText = GameObject.Find("Diamond Text").GetComponent<TextMeshProUGUI>();
+                diamondText.text = "DIAMONDS: 1";
             }
         }
         
@@ -163,14 +167,14 @@ public class TrashScript : MonoBehaviour
             float cash = PlayerPrefs.GetFloat("Cash");
             cash += amount;
             TextMeshProUGUI cashText = GameObject.Find("Cash Text").GetComponent<TextMeshProUGUI>();
-            cashText.text = "Cash: $" + cash.ToString();
+            cashText.text = "CASH: $" + cash.ToString();
             PlayerPrefs.SetFloat("Cash", cash);
         }
         else
         {
             PlayerPrefs.SetFloat("Cash", amount);
             TextMeshProUGUI cashText = GameObject.Find("Cash Text").GetComponent<TextMeshProUGUI>();
-            cashText.text = "Cash: $" + amount.ToString();
+            cashText.text = "CASH: $" + amount.ToString();
 
         }
     }
