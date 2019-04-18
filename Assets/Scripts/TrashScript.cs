@@ -20,7 +20,7 @@ public class TrashScript : MonoBehaviour
     private Lean.Touch.LeanTranslate translate;
     private Vector3 move;
 
-    private float speed = 0.2f;
+    private float speed = 0.5f;
     private int current = 0;
     public bool drag;
 
@@ -129,6 +129,10 @@ public class TrashScript : MonoBehaviour
             UpdateCash(valueCash);
             //UpdateDiamonds(chanceOfDiamond);
             gameObject.SetActive(false);            
+        }
+        else if(collider.tag == "Killzone")
+        {
+            Destroy(gameObject);
         }
         else
         {

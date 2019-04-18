@@ -22,27 +22,26 @@ public class Controller : MonoBehaviour
     public GameObject[] bins;
     public GameObject[] binLocations;
     public Transform[] leftSideWaypoints;
+    public Transform[] rightSideWaypoints;
     public Sprite[] trashSprites;
     public Sprite[] binSprites;
-
     public Sprite sprite;
-    //public static Trash t;
-    //public GameObject test;
 
-    //Create an object
-    //Add rigidbodies and renderer
-    //Add trash script
-    //Add properties from trash class to the script
+    //public class Trash
+    //{
+    //    public float valueCash;
+    //    public float chanceOfDiamond;
+    //    public int itemId;
+    //    public int trashType;
+    //    public Sprite sprite;
+    //}
 
     void Start()
     {
-        GameObject mainMenuController = GameObject.Find("Main Menu Controller");
-        MenuController menuController = mainMenuController.GetComponent<MenuController>();
-        
         if (PlayerPrefs.HasKey("Cash"))
         {
             cashText.text = "CASH: $" + PlayerPrefs.GetFloat("Cash");
-        }        
+        }
         if (PlayerPrefs.HasKey("Diamonds"))
         {
             diamondText.text = "DIAMONDS: " + PlayerPrefs.GetInt("Diamonds");
@@ -51,54 +50,64 @@ public class Controller : MonoBehaviour
         {
             energyText.text = "ENERGY: " + PlayerPrefs.GetInt("Energy");
         }
+
+        
+
+        GameObject mainMenuController = GameObject.Find("Main Menu Controller");
+        MenuController menuController = mainMenuController.GetComponent<MenuController>();
+        GameObject test = new GameObject("Test trash");
+
+        for (int i = 0; i< menuController.trashItems.Length; i++)
+        {
+            GameObject t = Instantiate(test);
+            t.name = "Trash"+i;
+            t.transform.position = rightSideWaypoints[0].position + new Vector3(0.0f + i, 0, 0);
+            t.AddComponent<TrashScript>();
+            
+            t.GetComponent<TrashScript>().Init(menuController.trashItems[i].valueCash, menuController.trashItems[i].chanceOfDiamond,
+                menuController.trashItems[i].itemId, menuController.trashItems[i].trashType, menuController.trashItems[i].sprite, rightSideWaypoints);
+            
+        }
+
+        for(int i=0; i < menuController.bins.Length; i++)
+        {
+            GameObject b = Instantiate(test);
+            b.name = "Bin" + i;
+            b.transform.position = binLocations[i].transform.position;
+            b.AddComponent<BinScript>();
+            int type = menuController.bins[i].binType;
+            b.GetComponent<BinScript>().Init(menuController.bins[i].maxCapacity, 
+                type, menuController.bins[i].binId, binSprites[type]);
+        }
+        
        
 
 
-        GameObject test = new GameObject("Test trash");
+        
 
-        GameObject t = Instantiate(test);
-        t.name = "Trash0";
-        t.transform.position = new Vector3(-1.5f, 1.425f, 0);
-        t.AddComponent<TrashScript>();
-        t.GetComponent<TrashScript>().Init(1.50f, 0.1f, 0, 0, trashSprites[0], leftSideWaypoints);
+        //GameObject b = Instantiate(test);
+        //b.transform.position = binLocations[0].transform.position;
+        //b.AddComponent<BinScript>();
+        //b.GetComponent<BinScript>().Init(5, 0, 0, binSprites[0]);
 
-        GameObject t1 = Instantiate(test);
-        t1.name = "Trash1";
-        t1.transform.position = new Vector3(-2.5f, 1.425f, 0);
-        t1.AddComponent<TrashScript>();
-        t1.GetComponent<TrashScript>().Init(1.50f, 0.1f, 1, 0, trashSprites[1], leftSideWaypoints);
+        //GameObject t = Instantiate(test);
+        //t.name = "Trash0";
+        //t.transform.position = rightSideWaypoints[0].position;
+        //t.AddComponent<TrashScript>();
+        //t.GetComponent<TrashScript>().Init(1.50f, 0.1f, 0, 0, trashSprites[0], rightSideWaypoints);
 
-
-
-        //t.AddComponent<Drag>();
-        //sprite = sprites[0];
-        //GameObject t = Instantiate(trash, trash.transform.position, Quaternion.identity) as GameObject;
-        //Trash test = new Trash(sprite, 3.0f, 0.1f, 1, 0);
-        //t = test.GetObject();
-
-        // GameObject trash = new Trash(sprite, 3.0f, 0.1f, 1, 0).GetObject();
-
-
-        //trash.AddComponent<TrashBehaviour>();
-        //trash.GetComponent<TrashBehaviour>().target = leftSideWaypoints;
-        //trash.GetComponent<TrashBehaviour>().trashSprite = sprite;
-
-
-        //TrashBehaviour.SetProperties(leftSideWaypoints, sprites[0]);
-
-        //sprite = sprites[0];
-        //t = new Trash(sprite, 3.0f, 0.1f, 1, 0);
-        //trash = t.GetObject();
-        //trash.AddComponent<Drag>();
-        //trash.AddComponent<ConveyorMovement>();
-        //ConveyorMovement.SetWaypoints(leftSideWaypoints);
+        //GameObject t1 = Instantiate(test);
+        //t1.name = "Trash1";
+        //t1.transform.position = leftSideWaypoints[0].position;
+        //t1.AddComponent<TrashScript>();
+        //t1.GetComponent<TrashScript>().Init(1.50f, 0.1f, 1, 0, trashSprites[1], leftSideWaypoints);       
     }
 
     void Update()
     {
 
-        deltaEng += Time.deltaTime;
-        testText.text = "Time passed: " + deltaEng.ToString();
+        //deltaEng += Time.deltaTime;
+        //testText.text = "Time passed: " + deltaEng.ToString();
         
     }
 

@@ -215,8 +215,8 @@ public class MenuController : MonoBehaviour
         if(bins[0] != null && trashItems[0] != null)
         {
             //Change scene
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
             Debug.Log("Change scene success");
-            //SceneManager.LoadScene(1, LoadSceneMode.Single);
         }
         else
         {
