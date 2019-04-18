@@ -16,8 +16,6 @@ public class TrashScript : MonoBehaviour
     private BoxCollider2D col;
     private Rigidbody2D rb;
     private new SpriteRenderer renderer;
-    private Lean.Touch.LeanSelectable selectable;
-    private Lean.Touch.LeanTranslate translate;
     private Vector3 move;
 
     private float speed = 0.5f;
