@@ -8,11 +8,12 @@ public class MenuController : MonoBehaviour
 {
     public Trash[] trashItems; //Array of trash used to create the trash gameobjects in the gameplay scene
     public Bin[] bins; //Array of bins used to create the bin gameobjects in the gameplay scene
-    public Sprite[] itemSprites;
-    public Sprite[] contractSprites;
-    public GameObject[] binPositions;
-    private int[] binTypes;
+    public Sprite[] itemSprites; //Array of all the available sprites that can be ussed for trash
+    public Sprite[] contractSprites; //The sprites that will be used for the selected contract
+    public GameObject[] binPositions; //This array holds the object that is used to determine what type of bin is at what position
+    private int[] binTypes; // Used to identify which type of bin is at what position
 
+    //Trash class is used in the game scene to instantiate the trash objects
     public class Trash
     {
         public float valueCash;
@@ -31,6 +32,7 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    //Bin class is used in the game scene to instantiate the bins
     public class Bin
     {
         public int maxCapacity;
@@ -47,7 +49,9 @@ public class MenuController : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject); //Don't destroy this object in the next scene as we need access to the Trash and
+                                            //Bin arrays
+
         //Set player prefs
         if (!PlayerPrefs.HasKey("Cash"))
             PlayerPrefs.SetFloat("Cash", 0.0f);
@@ -61,8 +65,8 @@ public class MenuController : MonoBehaviour
 
     #region Contract methods
     /// <summary>
-    /// On clicking free contract, takes the bin info at the position and fills the array.
     /// Creates an array of trash items for a free contract
+    /// Currently it is hard coded what will go into the array
     /// </summary>
     public void FreeContract()
     {
@@ -135,10 +139,6 @@ public class MenuController : MonoBehaviour
             trashItems[i+8] = t;
         }
         Debug.Log("$10 contract selected");
-        //foreach(var f in trashItems)
-        //{
-        //    Debug.Log("Item added: " + f.itemId.ToString());
-        //}
     }
     #endregion
 
@@ -150,15 +150,18 @@ public class MenuController : MonoBehaviour
     void GetBinPositions()
     {
         binTypes = new int[binPositions.Length];
+
+        //For each object in the binPositions array
+        //The name of the object is the position
+        //The name of the child is the bin type
+        //So fill the binTypes array with the correct positions and types
         foreach (var f in binPositions)
         {
-            //string binPos = f.gameObject.name;
             int binPos;
             int.TryParse(f.gameObject.name, out binPos);
             
             if (f.transform.childCount > 1)
             {
-                //string type = f.transform.GetChild(1).name;
                 int type;
                 int.TryParse(f.transform.GetChild(1).name, out type);
                 binTypes[binPos] = type;
@@ -171,6 +174,7 @@ public class MenuController : MonoBehaviour
             }
         }
     }
+
     /// <summary>
     /// Gets the type of bin from the binTypes array
     /// Then gets the max capacity for that type of bin and creates a Bin object
@@ -179,6 +183,7 @@ public class MenuController : MonoBehaviour
     void FillBinArray()
     {
         bins = new Bin[binTypes.Length];
+
         for(int i = 0; i < binTypes.Length; i++)
         {
             if (binTypes[i] == null)
@@ -191,6 +196,8 @@ public class MenuController : MonoBehaviour
                 int type = binTypes[i];
                 if (PlayerPrefs.HasKey("Max" + type))
                 {
+                    //Using PlayerPrefs to store the max capacity of the bin type
+                    //So in the future, the player can upgrade their bins
                     Bin bin = new Bin(PlayerPrefs.GetInt("Max" + type), type, i);
                     bins[i] = bin;
                 }
@@ -205,11 +212,11 @@ public class MenuController : MonoBehaviour
         }
     }
 
-
     public void StartGame()
     {
+        //Both these functions require checks to make sure the user has chosen their bins 
+        //properly. Currently there is no check in place
         GetBinPositions();
-        
         FillBinArray();
 
         if(bins[0] != null && trashItems[0] != null)

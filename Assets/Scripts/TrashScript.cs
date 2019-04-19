@@ -27,12 +27,8 @@ public class TrashScript : MonoBehaviour
     public Vector3 force;
     public float topSpeed = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
+    //Update is used to move the object along the waypoints until the item is being
+    //dragged by the player
     void Update()
     {
         if (drag == false)
@@ -47,6 +43,10 @@ public class TrashScript : MonoBehaviour
         }
     }
 
+    //OnMouse functions can be used to accept touch input on a 
+    //mobile device
+    //Gets the mouse position and changes the objects world postion
+    #region Drag
     void OnMouseDown()
     {
         drag = true;
@@ -71,21 +71,22 @@ public class TrashScript : MonoBehaviour
         if (rb.velocity.magnitude > topSpeed)
             force = rb.velocity.normalized * topSpeed;
     }
-
+   
     public void FixedUpdate()
     {
         rb.velocity = force;
     }
+    #endregion
 
     /// <summary>
     /// Initializes the trash object
     /// </summary>
-    /// <param name="value"></param>
-    /// <param name="chanceDiamond"></param>
-    /// <param name="id"></param>
-    /// <param name="trashType"></param>
-    /// <param name="sprite"></param>
-    /// <param name="waypoints"></param>
+    /// <param name="value"></param> Value of the object
+    /// <param name="chanceDiamond"></param>  Chance of the object rewarding a diamond
+    /// <param name="id"></param> The object id
+    /// <param name="trashType"></param> The type of trash; Paper, Plastic etc
+    /// <param name="sprite"></param> The sprite used for the sprite renderer
+    /// <param name="waypoints"></param> The transforms the object will move to
     public void Init(float value, float chanceDiamond, int itemId, 
         int trashType, Sprite sprite, Transform[] waypoints)
     {
@@ -93,21 +94,24 @@ public class TrashScript : MonoBehaviour
         this.chanceOfDiamond = chanceDiamond;
         this.id = itemId;
         this.trashType = trashType;
-        //this.Sprite = sprite;
         this.waypoints = waypoints;
 
+        //Sprite renderer
         renderer = gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
         renderer.sortingOrder = 1;
 
+        //Collider2D
         col = gameObject.AddComponent<BoxCollider2D>();
         col.isTrigger = true;
-        //col.size -= new Vector2(0.5f, 0.5f);
 
+        //Rigidbody2D
         rb = gameObject.AddComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.mass = 5.0f;
 
+        //After all components have been added, scale it down
+        //and set it's layer
         transform.localScale -= new Vector3(0.5f, 0.5f, 0);
         gameObject.layer = 9;
 
@@ -117,15 +121,17 @@ public class TrashScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Collision");
         //Check tag of collider
+        //Ignore if collision is with other trash
         if (collider.gameObject.layer == 9)
             return;
+        //The bins name is an int to make it easier to
+        //check if they're the same type
         else if (collider.name.Equals(trashType.ToString()))
         {
             Debug.Log("Successful bin");
             UpdateCash(valueCash);
-            //UpdateDiamonds(chanceOfDiamond);
+            UpdateDiamonds(chanceOfDiamond);
             gameObject.SetActive(false);            
         }
         else if(collider.tag == "Killzone")
@@ -140,6 +146,11 @@ public class TrashScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the chance is successful
+    /// If so then give the player a diamond
+    /// </summary>
+    /// <param name="chance"></param> Percentage chance of getting a diamond
     void UpdateDiamonds(float chance)
     {
         if (Random.value > (1 - chance))
@@ -162,6 +173,10 @@ public class TrashScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Updates the players cash when they put trash into a bin
+    /// </summary>
+    /// <param name="amount"></param> The amount to change the players cash by
     void UpdateCash(float amount)
     {
         if (PlayerPrefs.HasKey("Cash"))
