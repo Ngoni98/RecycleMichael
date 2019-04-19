@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+// References
+// I used Simple Drag and Drop solution from the unity asset store to drag the bins from the side of the
+// screen to the cells on the bottom
+// https://assetstore.unity.com/packages/tools/gui/simple-drag-and-drop-66449
+
 public class MenuController : MonoBehaviour
 {
     public Trash[] trashItems; //Array of trash used to create the trash gameobjects in the gameplay scene
